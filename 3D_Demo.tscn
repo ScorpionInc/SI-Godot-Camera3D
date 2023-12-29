@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3tq0cqyb5rio"]
+
+[ext_resource type="Script" path="res://SIGimbalCamera3D.gd" id="1_5axxq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qh2h7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n0qim"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ohikl"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_sd7e8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t0rq5"]
+height = 0.333
+radius = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_x1vxx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i6fm5"]
+
+[node name="SceneRoot" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("1_5axxq")
+debug_mode = true
+debug_mesh = SubResource("SphereMesh_qh2h7")
+distance = 5.0
+distance_target = 5.0
+collide_camera = true
+use_scroll_wheel = false
+use_mouse_movement = true
+require_middle_drag = true
+allow_camera_movement = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+spot_range = 25.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.32312, 0, -4.03292)
+mesh = SubResource("CylinderMesh_n0qim")
+
+[node name="LStaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/LStaticBody3D"]
+shape = SubResource("CylinderShape3D_ohikl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69828, 0, -1.77135)
+mesh = SubResource("TorusMesh_sd7e8")
+
+[node name="TStaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/TStaticBody3D"]
+shape = SubResource("CylinderShape3D_t0rq5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02284, 0, 1.61706)
+mesh = SubResource("BoxMesh_x1vxx")
+
+[node name="CStaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/CStaticBody3D"]
+shape = SubResource("BoxShape3D_i6fm5")
